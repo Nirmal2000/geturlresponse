@@ -1,0 +1,11 @@
+ /// 
+
+ - optimizing the code (variables, functions, switch case)
+ - add cors policy 
+ - seperate file for every route
+
+
+///
+ - npm account
+ - show - OS , model name , ram ,
+ Process id , exit when operation completed
