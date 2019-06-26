@@ -26,12 +26,20 @@ function get_response(){
                 document.getElementById('response').innerHTML=this.responseText    
             }
             else if(this.responseText){
-                alert(this.responseText)
                 document.getElementById('response').innerHTML=this.responseText
-                var btn = document.createElement("button");  
-                btn.innerHTML = htmlelements.get_url()
-                btn.setAttribute("onClick", "download_file()");                
-                document.body.appendChild(btn);
+                if(document.getElementById("download")){
+                    btn=document.getElementById("download")
+                    btn.innerHTML = htmlelements.get_url()
+                    btn.setAttribute("onClick", "download_file()");
+                    
+                }
+                else{
+                    var btn = document.createElement("button"); 
+                    btn.id = "download" 
+                    btn.innerHTML = htmlelements.get_url()
+                    btn.setAttribute("onClick", "download_file()");                
+                    document.body.appendChild(btn);
+                }
             }
             else{
                 document.getElementById('response').innerHTML = "INVALID URL"
