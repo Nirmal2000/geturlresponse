@@ -42,7 +42,10 @@ function get_response(){
                 }
             }
             else{
+                if(navigator.onLine)
                 document.getElementById('response').innerHTML = "INVALID URL"
+                else
+                document.getElementById('response').innerHTML = "Make sure you are connected to the Internet"
             }
         }        
     }
