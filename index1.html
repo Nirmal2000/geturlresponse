@@ -1,9 +1,13 @@
 <input type="text" id="get_url" >
-<input type ="button" value="Get response" onclick="get_response()">
+<input type ="button" value="Get response" id='btn' onclick="get_response()">
 <p id="response"></p>
 
 
 <script>
+if(navigator.onLine == false){
+    document.getElementById('response').innerHTML = "No Internet"
+    document.getElementById('btn').disabled  = true
+}
 
 htmlelements = {
     response:function(){
@@ -75,4 +79,12 @@ function download_file(){
     xtp.send()
 }
 
+window.addEventListener('online',()=>{
+    document.getElementById("response").innerHTML = "Connection established"
+    document.getElementById("btn").disabled = false
+})
+window.addEventListener('offline',()=>{
+    document.getElementById("response").innerHTML = "No Internet"
+    document.getElementById("btn").disabled = true
+})
 </script>
