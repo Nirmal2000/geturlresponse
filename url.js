@@ -10,10 +10,9 @@ module.exports.parse_get = function(req,res){
                     url_object = new URL(arr[1])                    
                     protocol = ret_proto(url_object.protocol)                    
                     protocol.get(data,function(re){
-                        console.log(re.statusCode)
                         res.end(data+'-'+re.statusCode)
                     }).on('error',function(err){
-                        res.end(this.statusCode)
+                        res.end("INVALID URL")
                     })
                 }
                 catch(err){
@@ -26,7 +25,7 @@ module.exports.parse_get = function(req,res){
                     http.get("http://"+data,function(re){
                         res.end(data+'-'+re.statusCode)
                     }).on('error',function(err){
-                        res.end(this.statusCode)
+                        res.end("INVALID URL")
                     })
                 }
 }

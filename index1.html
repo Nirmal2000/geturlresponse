@@ -1,13 +1,10 @@
 <input type="text" id="get_url" >
 <input type ="button" value="Get response" id='btn' onclick="get_response()">
 <p id="response"></p>
+<p id="online"></p>
 
-
+<!-- <head><script src="cache.js"></script></head> -->
 <script>
-if(navigator.onLine == false){
-    document.getElementById('response').innerHTML = "No Internet"
-    document.getElementById('btn').disabled  = true
-}
 
 htmlelements = {
     response:function(){
@@ -19,6 +16,12 @@ htmlelements = {
 }
 
 function get_response(){
+    // caches.open("foo").then(cache=>{
+    // console.log("Caching")
+    // console.log(htmlelements.get_url())
+    // cache.add("/url?f="+htmlelements.get_url())
+    
+    // })
     var xtp = new XMLHttpRequest
 
     xtp.onreadystatechange = function(){
@@ -31,6 +34,7 @@ function get_response(){
             }
             else if(this.responseText){
                 document.getElementById('response').innerHTML=this.responseText
+                
                 if(document.getElementById("download")){
                     btn=document.getElementById("download")
                     btn.innerHTML = htmlelements.get_url()
@@ -47,9 +51,8 @@ function get_response(){
             }
             else{
                 if(navigator.onLine)
-                document.getElementById('response').innerHTML = "INVALID URL"
-                else
-                document.getElementById('response').innerHTML = "Make sure you are connected to the Internet"
+                document.getElementById('response').innerHTML = this.responseText
+               
             }
         }        
     }
@@ -80,11 +83,20 @@ function download_file(){
 }
 
 window.addEventListener('online',()=>{
-    document.getElementById("response").innerHTML = "Connection established"
+    document.getElementById("online").innerHTML = "Connection established"
     document.getElementById("btn").disabled = false
 })
 window.addEventListener('offline',()=>{
-    document.getElementById("response").innerHTML = "No Internet"
-    document.getElementById("btn").disabled = true
+
+    document.getElementById("online").innerHTML = "No Internet"
+    //document.getElementById("btn").disabled = true
+    
+
 })
+window.addEventListener('load',()=>{
+navigator.serviceWorker.register("/cachereq.js").then(e=>{
+    console.log("REGISTERED")
+})
+})
+
 </script>
