@@ -14,3 +14,10 @@ Offline support added using Service Workers and Cache API
 
 To know how caching works refer <a href="https://github.com/Nirmal2000/geturlresponse/edit/master/cachereq.js">cachereq.js</a>
 
+<h1> How to use </h1>
+<ul>
+  <li>Clone this git</li>
+  <li>Open terminal or powershell in that folder</li>
+  <li>Run : node app1.js</li>
+<ul>
+
