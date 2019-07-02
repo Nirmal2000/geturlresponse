@@ -20,16 +20,14 @@ self.addEventListener('fetch',e=>{
             console.log("S")
             return res
         })
-        .catch(()=> caches.match(e.request).then(res=>{if(res){return res}else{throw "E"}}).catch(()=>{
-
-console.log("NOT IN CACHE")
-console.log(navigator.onLine)
- clients.get(e.clientId).then(client=>{client.postMessage({
-      msg: "Hey I just got a fetch from you!",
-      url: e.request.url
-    });
-    })
-
-}))
-)
+        .catch(()=> caches.match(e.request).then(res=>{if(res){return res}else{throw "E"}})
+            .catch(()=>{
+                clients.get(e.clientId)
+                .then(client=>{client.postMessage({
+                    url: e.request.url
+                });
+                })
+            })
+        )
+    )
 })

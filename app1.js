@@ -12,6 +12,7 @@ http.createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Origin','https://github.com')
     path_name = url.parse(req.url).pathname
     console.log(path_name)
+    console.log(path_name.endsWith('.js'))
     switch(path_name){
 
         case '/':
@@ -25,19 +26,54 @@ http.createServer(function (req, res) {
         case '/url':                
                 url_route.parse_get(req,res)
                 break
-        case '/cachereq.js':
-                fs.readFile('cachereq.js', function(err, data) {
-                    res.setHeader('Content-Type', 'text/javascript')
+        // case '/cachereq.js':
+        //         fs.readFile('cachereq.js', function(err, data) {
+        //             res.setHeader('Content-Type', 'text/javascript')
                     
-                    if(err){
-                        return console.error(err)
-                    }
-            
-                    res.write(data);
-                    res.end()
-                });
-            
+        //             if(err){
+        //                 return console.error(err)
+        //             }            
+        //             res.write(data);
+        //             res.end()
+        //         });
+        //         break
+        // case '/g.png':
+        //         fs.readFile('g.png', function(err, data) {
+        //             res.setHeader('Content-Type', 'image/png')                    
+        //             if(err){
+        //                 return console.error(err)
+        //             }            
+        //             res.write(data);
+        //             res.end()
+        //         });
+        
 
+                    
+
+    }
+    console.log("==>",path_name.substring(1))
+    if(path_name.endsWith('.js')){
+        fs.readFile(path_name.substring(1), function(err, data) {
+            res.setHeader('Content-Type', 'text/javascript')
+            
+            if(err){
+                return console.error(err)
+            }            
+            res.write(data);
+            res.end()
+        });
+
+    }
+    else if(path_name.endsWith('.png')){
+        fs.readFile(path_name.substring(1), function(err, data) {
+            res.setHeader('Content-Type', 'image/png')
+            
+            if(err){
+                return console.error(err)
+            }            
+            res.write(data);
+            res.end()
+        });
     }
     
 }).listen(process.env.PORT || 8080);
