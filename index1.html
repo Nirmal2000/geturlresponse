@@ -23,7 +23,6 @@ function get_response(){
     
     // })
     var xtp = new XMLHttpRequest
-
     xtp.onreadystatechange = function(){
         if(this.status=404){
             document.getElementById('response').innerHTML=this.statusText
@@ -98,5 +97,20 @@ navigator.serviceWorker.register("/cachereq.js").then(e=>{
     console.log("REGISTERED")
 })
 })
+navigator.serviceWorker.addEventListener('message', async function(event) {
+  var data  =event.data.url.split('f=')[1]
+  console.log(data)
+  var res = await wait_for_connection(data)
+  
+});
+
+function wait_for_connection(data){
+    return new Promise(res=>{
+        window.addEventListener('online',()=>{
+            get_response()
+            resolve()
+        })
+    })
+}
 
 </script>
