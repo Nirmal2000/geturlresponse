@@ -1,3 +1,5 @@
+
+
 htmlelements = {
     response:function(){
         return document.getElementById("response")
@@ -75,6 +77,7 @@ window.addEventListener('online',()=>{
 window.addEventListener('offline',()=>{
     document.getElementById("online").innerHTML = "No Internet"
 })
+
 
 window.addEventListener('load',()=>{
     navigator.serviceWorker.register("/cachereq.js").then(e=>{
